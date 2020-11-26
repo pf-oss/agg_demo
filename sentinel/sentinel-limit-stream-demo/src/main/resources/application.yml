@@ -1,0 +1,52 @@
+
+spring:
+  application:
+    name: sentinel-limit-stream
+
+  cloud:
+    # Sentinel 配置项，对应 SentinelProperties 配置属性类
+    sentinel:
+      enabled: true # 是否开启。默认为 true 开启
+      eager: true # 是否饥饿加载。默认为 false 关闭
+      transport:
+        dashboard: 127.0.0.1:8081 # Sentinel 控制台地址
+      filter:
+        url-patterns: /** # 拦截请求的地址。默认为 /*
+      # Sentinel 规则的数据源，是一个 Map 类型。key 为数据源名，可自定义；value 为数据源的具体配置
+      datasource:
+#        ds1:
+#          # 对应 DataSourcePropertiesConfiguration 类
+#          nacos:
+#            server-addr: 127.0.0.1:8848 # Nacos 服务器地址
+#            namespace: # Nacos 命名空间
+#            group-id: DEFAULT_GROUP # Nacos 分组
+#            data-id: ${spring.application.name}-flow-rule # Nacos 配置集编号
+#            data-type: json # 数据格式
+#            rule-type: FLOW # 规则类型
+
+        # file配置项
+        ds2:
+          # 对应 DataSourcePropertiesConfiguration 类
+          file:
+            file: C:/Users/90417/Desktop/sen/flow-rule.json # 配置规则所在文件。
+            recommendRefreshMs: 3000 # 定时读取实现刷新，默认为 3000 毫秒。
+            data-type: json # 数据格式
+            rule-type: FLOW # 规则类型
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' # 需要开放的端点。默认值只打开 health 和 info 两个端点。通过设置 * ，可以开放所有端点。
+  endpoint:
+    # Health 端点配置项，对应 HealthProperties 配置类
+    health:
+      enabled: true # 是否开启。默认为 true 开启。
+      show-details: ALWAYS # 何时显示完整的健康信息。默认为 NEVER 都不展示。可选 WHEN_AUTHORIZED 当经过授权的用户；可选 ALWAYS 总是展示。
+
+
+
+server:
+  port: 8082
