@@ -1,13 +1,10 @@
 package com.feign.consumerdemo1.controller;
 
-//import com.feign.consumerdemo1.feign.DemoProviderApiFeignClient;
 import com.feign.consumerdemo1.dto.DemoDTO;
 import com.feign.consumerdemo1.feign.DemoProviderFeignClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +21,6 @@ public class ConsumerController {
 
     @Resource
     private DemoProviderFeignClient demoProviderFeignClient;
-
 
     @GetMapping("/test_get_demo")
     public DemoDTO testGetDemo(@RequestParam("type") int type, DemoDTO demoDTO) {
@@ -48,10 +44,10 @@ public class ConsumerController {
     }
 
 
-    @GetMapping("/echo")
-    public String echo(String name) {
-        return demoProviderFeignClient.echo(name);
-    }
+//    @GetMapping("/echo")
+//    public String echo(String name) {
+//        return demoProviderFeignClient.echo(name);
+//    }
 
 
 }

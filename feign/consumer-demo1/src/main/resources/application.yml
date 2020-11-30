@@ -15,7 +15,8 @@ spring:
         dashboard: 127.0.0.1:8083
       filter:
         url-patterns: /** # 拦截请求的地址。默认为/*
-
+  main:
+    allow-bean-definition-overriding: true
 
 server:
   port: 8082 # 服务器端口。默认为 8080
