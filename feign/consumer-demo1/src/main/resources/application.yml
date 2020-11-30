@@ -1,0 +1,54 @@
+
+spring:
+  application:
+    name: feign-consumer-demo1 # Spring 应用名
+  cloud:
+    nacos:
+      # Nacos 作为注册中心的配置项，对应 NacosDiscoveryProperties 配置类
+      discovery:
+        server-addr: 127.0.0.1:8848 # Nacos 服务器地址
+
+    sentinel:
+      enabled: true
+      eager: true # 是否饥饿加载。默认false关闭
+      transport:
+        dashboard: 127.0.0.1:8083
+      filter:
+        url-patterns: /** # 拦截请求的地址。默认为/*
+
+
+server:
+  port: 8082 # 服务器端口。默认为 8080
+
+
+logging:
+  level:
+    com.feign.consumerdemo1.feign: DEBUG
+
+feign:
+  sentinel:
+    enabled: true # 开启Sentinel 对Feign的支持， 默认false关闭
+  # Feign 客户端配置，对应 FeignClientProperties 配置属性类
+  client:
+    # config 配置项是 Map 类型。key 为 Feign 客户端的名字，value 为 FeignClientConfiguration 对象
+    config:
+      # 全局级别配置 (客户端级别优于先于全局)
+      default:
+        logger-level: FULL
+      # 客户端级别配置
+      feign-provider-demo1:
+        logger-level: FULL
+
+
+
+
+
+  # Feign Apache HttpClient 配置项，对应 FeignHttpClientProperties 配置属性类
+  httpclient:
+    enabled: false # 是否开启。默认为 true
+    max-connections: 200 # 最大连接数。默认为 200
+    max-connections-per-route: 50 # 每个路由的最大连接数。默认为 50。router = host + port
+  okhttp:
+    enabled: true
+
+
