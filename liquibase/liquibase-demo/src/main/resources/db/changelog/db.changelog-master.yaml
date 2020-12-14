@@ -1,0 +1,8 @@
+databaseChangeLog:
+    - changeSet:
+        id: 3
+        author: pf
+        changes:
+        - sqlFile:
+            encoding: utf8
+            path: classpath:db/changelog/sqlfile/liquibase.sql
