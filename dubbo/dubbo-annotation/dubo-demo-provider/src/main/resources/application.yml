@@ -3,7 +3,7 @@
 dubbo:
   # Dubbo \u5E94\u7528\u914D\u7F6E
   application:
-    name: user-service-provider # \u5E94\u7528\u540D
+    name: user-feign-provider # \u5E94\u7528\u540D
   # Dubbo \u6CE8\u518C\u4E2D\u5FC3\u914D
   registry:
     address: zookeeper://127.0.0.1:2181 # \u6CE8\u518C\u4E2D\u5FC3\u5730\u5740\u3002\u4E2A\u97A5\u591A\u6CE8\u518C\u4E2D\u5FC3\uFF0C\u53EF\u89C1 http://dubbo.apache.org/zh-cn/docs/user/references/registry/introduction.html \u6587\u6863\u3002
@@ -18,7 +18,7 @@ dubbo:
       version: 1.0.0
   # \u914D\u7F6E\u626B\u63CF Dubbo \u81EA\u5B9A\u4E49\u7684 @Service \u6CE8\u89E3\uFF0C\u66B4\u9732\u6210 Dubbo \u670D\u52A1\u63D0\u4F9B\u8005
   scan:
-    base-packages: com.dubbo.annation.dubodemoprovider.service
+    base-packages: com.dubbo.annation.dubodemoprovider.feign
 
 
 server:
