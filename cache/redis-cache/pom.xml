@@ -52,6 +52,11 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.2.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.config</groupId>
+            <artifactId>common-demo</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 
         <!-- 实现对 Caches 的自动化配置 -->
         <dependency>
@@ -59,23 +64,23 @@
             <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
 
-        <!-- 实现对 Spring Data Redis 的自动化配置 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <exclusions>
-                <!-- 去掉对 Lettuce 的依赖，因为 Spring Boot 优先使用 Lettuce 作为 Redis 客户端 -->
-                <exclusion>
-                    <groupId>io.lettuce</groupId>
-                    <artifactId>lettuce-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- 引入 Jedis 的依赖，这样 Spring Boot 实现对 Jedis 的自动化配置 -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
+        <!--&lt;!&ndash; 实现对 Spring Data Redis 的自动化配置 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-data-redis</artifactId>-->
+            <!--<exclusions>-->
+                <!--&lt;!&ndash; 去掉对 Lettuce 的依赖，因为 Spring Boot 优先使用 Lettuce 作为 Redis 客户端 &ndash;&gt;-->
+                <!--<exclusion>-->
+                    <!--<groupId>io.lettuce</groupId>-->
+                    <!--<artifactId>lettuce-core</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; 引入 Jedis 的依赖，这样 Spring Boot 实现对 Jedis 的自动化配置 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>redis.clients</groupId>-->
+            <!--<artifactId>jedis</artifactId>-->
+        <!--</dependency>-->
 
 
         <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->

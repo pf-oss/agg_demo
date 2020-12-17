@@ -13,12 +13,12 @@ import org.springframework.stereotype.Repository;
 //@CacheConfig(cacheNames = "user")
 public interface UserMapper extends BaseMapper<UserDO> {
 
-//        @Cacheable(cacheNames="user", key="#p0")
+        @Cacheable(cacheNames="user", key="#p0")
 //    @Cacheable(cacheNames="user", key="'user'.concat(#a0)")
 //    @Cacheable(cacheNames="user", key="'d'")
 //    @Cacheable(cacheNames="user", key="#id")
 //@Cacheable(cacheNames="user")
-    @Cacheable(cacheNames="user", key="'name:'+ #p0")
+//    @Cacheable(cacheNames="user", key="'name:'+ #p0")
 //    @Cacheable(value = "UserInfoList", cacheNames="UserInfoList", key="#p0")
     UserDO selectById(Integer id);
 
