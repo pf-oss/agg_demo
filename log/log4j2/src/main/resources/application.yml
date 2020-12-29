@@ -1,0 +1,7 @@
+
+spring:
+  application:
+    name: demo-application # 应用名
+
+server:
+  port: 8081
