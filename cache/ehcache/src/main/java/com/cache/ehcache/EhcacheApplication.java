@@ -7,7 +7,7 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @EnableCaching
-@MapperScan(basePackages = "com.cache.ehcache.mapper")
+@MapperScan(basePackages = "com.cache.ehcache.dao")
 public class EhcacheApplication {
 
     public static void main(String[] args) {
