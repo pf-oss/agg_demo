@@ -1,0 +1,15 @@
+
+## 授权码模式
+http://localhost:8099/oauth/authorize?response_type=code&client_id=clientMode&redirect_uri=http://www.baidu.com
+
+## 隐式模式
+http://localhost:8099/oauth/authorize?response_type=token&client_id=clientMode&redirect_uri=http://www.baidu.com
+
+
+参考文档：
+https://github.com/KD-oauth/oauth2-demo/
+
+https://blog.csdn.net/a624193873/article/details/106417218/
+
+
+
