@@ -12,8 +12,7 @@ import java.util.Set;
  * @author: pf
  * @create: 2021/1/5 16:14
  */
-public class LoginUser implements UserDetails
-{
+public class LoginUser implements UserDetails{
     private static final long serialVersionUID = 1L;
 
     /**

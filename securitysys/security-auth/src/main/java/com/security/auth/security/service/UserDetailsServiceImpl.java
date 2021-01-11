@@ -51,8 +51,7 @@ public class UserDetailsServiceImpl implements UserDetailsService
         return createLoginUser(user);
     }
 
-    public UserDetails createLoginUser(SysUser user)
-    {
+    public UserDetails createLoginUser(SysUser user){
         return new LoginUser(user, permissionService.getMenuPermission(user));
     }
 }

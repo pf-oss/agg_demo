@@ -1,0 +1,42 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/security_oauth2?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+  application: oauth
+
+  resources:
+    static-locations: classpath:/
+  freemarker:
+    template-loader-path: classpath:/templates/
+    suffix: .html
+    content-type: text/html
+    charset: UTF-8
+
+server:
+  port: 8090
+
+pagehelper:
+  auto-dialect: mysql
+
+mybatis-plus:
+  mapper-locations: "classpath*:/mapper/**/*.xml"
+  type-aliases-package: com.security.auth.model # 扫描的包路径
+  global-config:
+    banner: false # 关闭打印mybatis-plus的LOGO
+    db-config:
+      logicDeleteField: deleted
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  executor-type: batch
+
+
