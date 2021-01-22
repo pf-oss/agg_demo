@@ -1,0 +1,16 @@
+{
+  "properties": {
+    "color": {
+      "type": "keyword"
+    },
+    "make": {
+      "type": "keyword"
+    },
+    "price": {
+      "type": "long"
+    },
+    "sold": {
+      "type": "date"
+    }
+  }
+}
