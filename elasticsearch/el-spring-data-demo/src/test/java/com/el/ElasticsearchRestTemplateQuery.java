@@ -9,6 +9,8 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.core.CountRequest;
+import org.elasticsearch.client.core.CountResponse;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -33,14 +35,18 @@ public class ElasticsearchRestTemplateQuery {
 
     String index = "cars";
 
+    /**
+     *  elasticsearchRestTemplate 实现方式
+     */
     @Test
     void getById(){
         Car car = elasticsearchRestTemplate.get("eFYiKXcBpxozTdPakfjr", Car.class);
         System.out.println("通过Id查询的数据" + JSON.toJSONString(car));
     }
 
-
-    //按id查询
+    /**
+     *  restHighLevelClient 实现方式
+     */
     @Test
     void testQueryBookByIdRest() throws Exception{
         GetRequest getRequest = new GetRequest(index, "eFYiKXcBpxozTdPakfjr");
@@ -48,6 +54,9 @@ public class ElasticsearchRestTemplateQuery {
         System.out.println(getResponse.toString());
     }
 
+    /**
+     *  elasticsearchRestTemplate 实现方式
+     */
     @Test
     void getList(){
         QueryBuilder matchQueryBuilder = new MatchQueryBuilder("color", "red");
@@ -56,6 +65,10 @@ public class ElasticsearchRestTemplateQuery {
         System.out.println("查询数据:" + JSON.toJSONString(search));
     }
 
+
+    /**
+     *  restHighLevelClient 实现方式
+     */
     @Test
     void getListRest() throws Exception{
         QueryBuilder matchQueryBuilder = new MatchQueryBuilder("color", "red");
@@ -67,7 +80,9 @@ public class ElasticsearchRestTemplateQuery {
         System.out.println("查询数据:" + JSON.toJSONString(search));
     }
 
-
+    /**
+     *  elasticsearchRestTemplate 实现方式
+     */
     @Test
     void listByMultiCondition(){
         NativeSearchQuery nativeSearchQuery = new NativeSearchQueryBuilder().withQuery(
@@ -79,6 +94,9 @@ public class ElasticsearchRestTemplateQuery {
         System.out.println("多条件查询: " + JSON.toJSONString(search));
     }
 
+    /**
+     *  restHighLevelClient 实现方式
+     */
     @Test
     void listByMultiConditionRest()throws Exception{
         SearchRequest searchRequest = new SearchRequest(index);
@@ -92,6 +110,9 @@ public class ElasticsearchRestTemplateQuery {
 
     }
 
+    /**
+     *  elasticsearchRestTemplate 实现方式
+     */
     @Test
     void listByPage(){
       QueryBuilder queryBuilder = new MatchQueryBuilder("color", "red");
@@ -104,6 +125,9 @@ public class ElasticsearchRestTemplateQuery {
     }
 
 
+    /**
+     *  restHighLevelClient 实现方式
+     */
     @Test
     void listByPageRest()throws Exception{
         SearchRequest searchRequest = new SearchRequest(index);
@@ -119,6 +143,9 @@ public class ElasticsearchRestTemplateQuery {
 
     // ===================================================================== 聚合操作 =====================================================
 
+    /**
+     *  elasticsearchRestTemplate 实现方式
+     */
     @Test
     void count(){
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder().build();
@@ -126,6 +153,19 @@ public class ElasticsearchRestTemplateQuery {
         System.out.println("文档数量：" + count);
     }
 
+    /**
+     *  restHighLevelClient 实现方式
+     */
+    @Test
+    void countRest() throws Exception{
+        CountRequest countRequest = new CountRequest(index);
+        CountResponse count = restHighLevelClient.count(countRequest, RequestOptions.DEFAULT);
+        System.out.println("文档的数量: " + JSON.toJSONString(count));
+    }
+
+    /**
+     *  elasticsearchRestTemplate 实现方式
+     */
     @Test
     void avgPrice(){
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
@@ -135,6 +175,26 @@ public class ElasticsearchRestTemplateQuery {
         System.out.println("价格的平均值: " +  JSON.toJSONString(search.getAggregations().getAsMap().get("avg_price")));
     }
 
+    /**
+     *  restHighLevelClient 实现方式
+     */
+    @Test
+    void avgPriceRest() throws Exception{
+
+        SearchRequest searchRequest = new SearchRequest(index);
+
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.aggregation(AggregationBuilders.avg("avg_price").field("price")).size(0);
+
+        searchRequest.source(searchSourceBuilder);
+
+        SearchResponse search = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        System.out.println("查询的平均值为:" + JSON.toJSONString(search));
+    }
+
+    /**
+     *  elasticsearchRestTemplate 实现方式
+     */
     @Test
     void maxPrice(){
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
@@ -142,7 +202,19 @@ public class ElasticsearchRestTemplateQuery {
                 .build();
         SearchHits<Car> search = elasticsearchRestTemplate.search(searchQuery, Car.class, IndexCoordinates.of(index));
         System.out.println("最大的价格: " +  JSON.toJSONString(search.getAggregations().getAsMap().get("max_price")));
+    }
 
+    /**
+     *  restHighLevelClient 实现方式
+     */
+    @Test
+    void maxPriceRest() throws Exception{
+        SearchRequest searchRequest = new SearchRequest(index);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.aggregation(AggregationBuilders.max("max_price").field("price")).size(0);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse search = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+        System.out.println("最大的价格: " + JSON.toJSONString(search));
     }
 
 
