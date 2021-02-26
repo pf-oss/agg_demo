@@ -12,7 +12,6 @@
     <artifactId>rockmq-springboot</artifactId>
 
     <modules>
-        <module>rockmq_demo</module>
         <module>rockmq_demo_batch</module>
         <module>rockmq_demo_bord</module>
         <module>rockmq_demo_order</module>
