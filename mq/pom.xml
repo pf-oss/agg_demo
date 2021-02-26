@@ -6,7 +6,12 @@
 
     <groupId>mq</groupId>
     <artifactId>mq</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>rockmq</module>
+        <module>kafka</module>
+    </modules>
 
 
 </project>
