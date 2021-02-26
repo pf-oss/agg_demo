@@ -1,0 +1,5 @@
+name=zhangsan
+address=hunan
+email=123@qq.com
+phone=12313
+type=hfkshdjkfh
