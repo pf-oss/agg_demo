@@ -1,0 +1,28 @@
+
+server:
+  port: 8099
+
+spring:
+  application:
+    name: demo-producer-application
+  cloud:
+    stream:
+      # Binding \u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94BindingProperties Map
+      binders:
+        demo01-output:
+          destonation: DEMO-TOPIC-01 # \u76EE\u7684\u5730\uFF0C\u8FD9\u91CC\u4F7F\u7528Kafka Topic
+          content-type: application/json # \u5185\u5BB9\u683C\u5F0F\uFF0C\u8FD9\u91CC\u4F7F\u7528JSON
+      # Spring Cloud Stream Kafka \u914D\u7F6E\u9879
+      kafka:
+        # Kafka Binder \u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94KafkaBinderConfigurationProperties\u7C7B
+        binder:
+          brokers: 192.168.177.128:9092
+#          min-partition-count: 1
+#          auto-add-partitions: true
+          replication-factor: 1
+        # Kafka \u81EA\u5B9A\u4E49Binding \u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94KafkaBindingProperties Map
+        bindings:
+          demo01-output:
+            # Kafka Producer \u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94KafkaProducerProperties\u7C7B
+            producer:
+              sync: true # \u662F\u5426\u540C\u6B65\u53D1\u9001\u6D88\u606F\uFF0C \u9ED8\u8BA4\u4E3Afalse\u5F02\u6B65

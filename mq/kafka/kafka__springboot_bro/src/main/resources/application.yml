@@ -1,0 +1,34 @@
+server:
+  port: 8099
+
+spring:
+  # Kafka \u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94 KafkaProperties \u914D\u7F6E\u7C7B
+  kafka:
+    bootstrap-servers: 192.168.177.128:9092 # \u6307\u5B9AKafka Broker\u5730\u5740, \u53EF\u4EE5\u8BBE\u7F6E\u591A\u4E2A\uFF0C\u4EE5\u9017\u53F7\u5206\u5272
+    # Kafka Producer \u914D\u7F6E\u9879
+    producer:
+      acks: 1 # 0-\u4E0D\u5E94\u7B54\u30021-leader \u5E94\u7B54\u3002all-\u6240\u6709 leader \u548C follower \u5E94\u7B54\u3002
+      retries: 3 # \u53D1\u9001\u5931\u8D25\u65F6\uFF0C\u91CD\u8BD5\u53D1\u9001\u7684\u6B21\u6570
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer # \u6D88\u606F\u7684 key \u7684\u5E8F\u5217\u5316
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer # \u6D88\u606F\u7684 value \u7684\u5E8F\u5217\u5316
+    # Kafka Consumer \u914D\u7F6E\u9879
+    consumer:
+      auto-offset-reset: latest # \u8BBE\u7F6E\u6D88\u8D39\u8005\u5206\u7EC4\u6700\u521D\u7684\u6D88\u8D39\u8FDB\u5EA6\u4E3A latest \u3002\u53EF\u53C2\u8003\u535A\u5BA2 https://blog.csdn.net/lishuangzhe7047/article/details/74530417 \u7406\u89E3
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.springboot.bro.kafka__springboot_bro.message
+    # Kafka Consumer Listener \u76D1\u542C\u5668\u914D\u7F6E
+    listener:
+      missing-topics-fatal: false # \u6D88\u8D39\u76D1\u542C\u63A5\u53E3\u76D1\u542C\u7684\u4E3B\u9898\u4E0D\u5B58\u5728\u65F6\uFF0C\u9ED8\u8BA4\u4F1A\u62A5\u9519\u3002\u6240\u4EE5\u901A\u8FC7\u8BBE\u7F6E\u4E3A false \uFF0C\u89E3\u51B3\u62A5\u9519
+
+logging:
+  level:
+    org:
+      springframework:
+        kafka: ERROR # spring-kafka INFO \u65E5\u5FD7\u592A\u591A\u4E86\uFF0C\u6240\u4EE5\u6211\u4EEC\u9650\u5236\u53EA\u6253\u5370 ERROR \u7EA7\u522B
+      apache:
+        kafka: ERROR # kafka INFO \u65E5\u5FD7\u592A\u591A\u4E86\uFF0C\u6240\u4EE5\u6211\u4EEC\u9650\u5236\u53EA\u6253\u5370 ERROR \u7EA7\u522B

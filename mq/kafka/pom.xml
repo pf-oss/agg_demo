@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>kafka</groupId>
+    <artifactId>kafka</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+    <modules>
+        <module>kafka-simple-demo</module>
+        <module>kafka__springboot_bro</module>
+        <module>kafka_concurrency</module>
+        <module>kafka_springboot</module>
+        <module>kafka_springboot-batch</module>
+        <module>kafka_springboot_retry</module>
+        <module>kafka_transaction</module>
+        <module>springcloud_consumer</module>
+        <module>springcloud_producer</module>
+    </modules>
+
+
+</project>

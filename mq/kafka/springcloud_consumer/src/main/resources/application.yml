@@ -1,0 +1,21 @@
+server:
+  port: ${random.int[10000,19999]} # \u968F\u673A\u7AEF\u53E3\uFF0C\u65B9\u4FBF\u542F\u52A8\u591A\u4E2A\u6D88\u8D39\u8005
+
+spring:
+  application:
+    name: demo-consume-application
+  cloud:
+    stream:
+      # Binding \u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94BindingProperties Map
+      binders:
+        demo01-input:
+          destonation: DEMO-TOPIC-01 # \u76EE\u7684\u5730\uFF0C\u8FD9\u91CC\u4F7F\u7528Kafka Topic
+          content-type: application/json # \u5185\u5BB9\u683C\u5F0F\uFF0C\u8FD9\u91CC\u4F7F\u7528JSON
+          group: demo01-consume-group #
+      # Spring Cloud Stream Kafka \u914D\u7F6E\u9879
+      kafka:
+        # Kafka Binder \u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94KafkaBinderConfigurationProperties\u7C7B
+        binder:
+          brokers: 192.168.177.128:9092
+          replication-factor: 1
+

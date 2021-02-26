@@ -1,0 +1,43 @@
+server:
+  port: 8099
+
+spring:
+  kafka:
+    bootstrap-servers: 192.168.177.128:9092 # \u6307\u5B9AKafka Broker\u5730\u5740, \u53EF\u4EE5\u8BBE\u7F6E\u591A\u4E2A\uFF0C\u4EE5\u9017\u53F7\u5206\u5272
+
+    # Kafka Producer \u914D\u7F6E\u9879
+    producer:
+      acks: 1 # 0- \u4E0D\u5E94\u7B54\uFF0C1-leader \u5E94\u7B54\uFF0C all-\u6240\u6709leader \u548Cfollower \u5E94\u7B54\u3002
+      retries: 3 # \u53D1\u9001\u5931\u8D25\u65F6\uFF0C\u91CD\u8BD5\u53D1\u9001\u7684\u6B21\u6570
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer # \u6D88\u606F\u7684 key \u7684\u5E8F\u5217\u5316
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer # \u6D88\u606F\u7684 value \u7684\u5E8F\u5217\u5316
+      batch-size: 2 # \u6BCF\u6B21\u6279\u91CF\u53D1\u9001\u6D88\u606F\u7684\u6700\u5927\u6570\u91CF
+      buffer-memory: 20000 # \u6BCF\u6B21\u6279\u91CF\u53D1\u9001\u6D88\u606F\u7684\u6700\u5927\u5185\u5B58
+      properties:
+        linger:
+          ms: 20000 # \u6279\u5904\u7406\u5EF6\u8FDF\u65F6\u95F4\u4E0A\u9650\u3002\u8FD9\u91CC\u914D\u7F6E\u4E3A 30 * 1000 ms \u8FC7\u540E\uFF0C\u4E0D\u7BA1\u662F\u5426\u6D88\u606F\u6570\u91CF\u662F\u5426\u5230\u8FBE batch-size \u6216\u8005\u6D88\u606F\u5927\u5C0F\u5230\u8FBE buffer-memory \u540E\uFF0C\u90FD\u76F4\u63A5\u53D1\u9001\u4E00\u6B21\u8BF7\u6C42\u3002
+    # Kafka Consumer \u914D\u7F6E\u9879
+    consumer:
+      auto-offset-reset: earliest # \u8BBE\u7F6E\u6D88\u8D39\u8005\u5206\u7EC4\u6700\u521D\u7684\u6D88\u8D39\u8FDB\u5EA6\u4E3A earliest \u3002\u53EF\u53C2\u8003\u535A\u5BA2 https://blog.csdn.net/lishuangzhe7047/article/details/74530417 \u7406\u89E3
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      fetch-min-size: 10 # poll \u4E00\u6B21\u6D88\u606F\u62C9\u53D6\u7684\u6700\u5927\u6570\u91CF
+      fetch-max-wait: 10s # poll \u4E00\u6B21\u62C9\u53D6\u7684\u963B\u585E\u7684\u6700\u5927\u65F6\u957F\uFF0C\u5355\u4F4D\uFF1A\u6BEB\u79D2\u3002\u8FD9\u91CC\u6307\u7684\u662F\u963B\u585E\u62C9\u53D6\u9700\u8981\u6EE1\u8DB3\u81F3\u5C11 fetch-min-size \u5927\u5C0F\u7684\u6D88\u606F
+      max-poll-records: 100 # poll \u4E00\u6B21\u6D88\u606F\u62C9\u53D6\u7684\u6700\u5927\u6570\u91CF
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: com.springboot.batch.kafka_springbootbatch.message
+    # Kafka Consumer Listener \u76D1\u542C\u5668\u914D\u7F6E
+    listener:
+      missing-topics-fatal: false # \u6D88\u8D39\u76D1\u542C\u63A5\u53E3\u76D1\u542C\u7684\u4E3B\u9898\u4E0D\u5B58\u5728\u65F6\uFF0C\u9ED8\u8BA4\u4F1A\u62A5\u9519\u3002\u6240\u4EE5\u901A\u8FC7\u8BBE\u7F6E\u4E3A false \uFF0C\u89E3\u51B3\u62A5\u9519
+      type: BATCH # \u76D1\u542C\u5668\u7C7B\u578B\uFF0C\u9ED8\u8BA4\u4E3A SINGLE \uFF0C\u53EA\u76D1\u542C\u5355\u6761\u6D88\u606F\u3002\u8FD9\u91CC\u6211\u4EEC\u914D\u7F6E BATCH \uFF0C\u76D1\u542C\u591A\u6761\u6D88\u606F\uFF0C\u6279\u91CF\u6D88\u8D39
+
+logging:
+  level:
+    org:
+      springframework:
+        kafka: ERROR # spring-kafka INFO \u65E5\u5FD7\u592A\u591A\u4E86\uFF0C\u6240\u4EE5\u6211\u4EEC\u9650\u5236\u53EA\u6253\u5370 ERROR \u7EA7\u522B
+      apache:
+        kafka: ERROR # kafka INFO \u65E5\u5FD7\u592A\u591A\u4E86\uFF0C\u6240\u4EE5\u6211\u4EEC\u9650\u5236\u53EA\u6253\u5370 ERROR \u7EA7\u522B
