@@ -1,0 +1,11 @@
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    bootstrap:
+      enable: true
+      log-enable: true
+    data-id: example
+    type: yaml
+    group: DEFAULT_GROUP
+    namespace: c905478b-1b53-439e-b2b7-c5f8fc3acdf9
+

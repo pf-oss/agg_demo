@@ -1,0 +1,21 @@
+server:
+  port: 8097
+
+
+spring:
+  application:
+    name: demo-application
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        namespace:
+        group: DEFAULT_GROUP
+        name: demo-application
+        file-extension: yaml
+
+
+
+
+

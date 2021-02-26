@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: nacos-filter.order
+
+server:
+  port: 8096
+
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    bootstrap:
+      enable: true
+      log-enable: true
+    data-id: example-multi-01
+    #    data-ids: example-multi-02 # ���ö����ݼ�
+    type: yaml
+    group: DEFAULT_GROUP
+    namespace:
+    auto-refresh: true
+    ext-config:
+    - server-addr: 127.0.0.1:8848
+      data-ids: example-multi-11, example-multi-12
+      type: yaml
+      group: DEFAULT_GROUP
+      namespace:
+      auto-refresh: true

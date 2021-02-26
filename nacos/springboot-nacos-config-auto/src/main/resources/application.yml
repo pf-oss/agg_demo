@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: nacos-auto-refresh
+
+server:
+  port: 8095
+
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    bootstrap:
+      enable: true
+      log-enable: true@RefreshScope
+    data-id: example-auto-refresh
+    type: yaml
+    group: DEFAULT_GROUP
+    namespace:
+    auto-refresh: true
+
+## Actuator
+
+management:
+  endpoint:
+    health:
+      show-details: always # 何时显示完整的健康信息，默认为NEVER都不展示，可选WHEN_AUTHORIZED 当经过授权的用户；可选ALWAYS总是展示
+  endpoints:
+    # Actuator HTTP配置项，对应WebEndpointProperties 配置类
+    web:
+      exposure:
+        include: '*' # 需要开放的端点。默认值只打开health 和 info 两个端点， 通过设置 *， 可以开放所有端点
+
